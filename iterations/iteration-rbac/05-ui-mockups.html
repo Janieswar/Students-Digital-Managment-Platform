@@ -1,1188 +1,1203 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CEC Student Digital Platform - UI Mockups</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: {
-            sidebar: 'hsl(222.2, 84%, 4.9%)',
-            'sidebar-fg': 'hsl(210, 40%, 98%)',
-            accent: 'hsl(217.2, 91.2%, 59.8%)',
-            destructive: 'hsl(0, 84.2%, 60.2%)',
-            warning: 'hsl(38, 92%, 50%)',
-            success: 'hsl(142.1, 76.2%, 36.3%)',
-            muted: 'hsl(210, 40%, 96.1%)',
-            border: 'hsl(214.3, 31.8%, 91.4%)',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEC Admin Dashboard - High Fidelity Mockup</title>
+    <!-- 
+        IMPORTANT: Open this file in a modern Web Browser (Chrome, Edge, etc.) 
+        to see the high-fidelity interactive implementation.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest" crossorigin></script>
+    
+    <script>
+        // Move Error Handling to a standard script so it works before Babel starts
+        window.addEventListener('error', function(event) {
+            console.error("Global Mockup Error:", event.error || event.message);
+            const root = document.getElementById('root');
+            if (root) {
+                const errorMessage = event.error ? (event.error.stack || event.error.message) : (event.message || "Unknown Script Error");
+                root.innerHTML = `
+                    <div style="padding: 40px; background: #fff1f2; color: #9f1239; border: 2px solid #fda4af; border-radius: 24px; font-family: 'Inter', sans-serif; max-width: 700px; margin: 60px auto; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                            <div style="background: #be123c; color: white; width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <h2 style="font-weight: 900; font-size: 28px; letter-spacing: -0.025em;">Mockup Initialization Failed</h2>
+                        </div>
+                        <p style="margin-bottom: 8px; font-weight: 700; color: #be123c;">Technical Error Details:</p>
+                        <pre style="background: rgba(255,255,255,0.7); padding: 20px; border-radius: 16px; font-family: monospace; font-size: 13px; border: 1px solid #fecdd3; overflow-x: auto; white-space: pre-wrap; word-break: break-all; max-height: 300px;">${errorMessage}</pre>
+                        <div style="margin-top: 24px; font-size: 14px; line-height: 1.6; color: #4b5563;">
+                            <p style="font-weight: 600; margin-bottom: 8px;">Possible causes:</p>
+                            <ul style="margin-left: 20px; list-style-type: disc;">
+                                <li><b>Internet Connection</b>: Required to download React and Tailwind.</li>
+                                <li><b>Browser</b>: Please use <b>Chrome</b> or <b>Edge</b>.</li>
+                                <li><b>Local Files</b>: If using file://, Chrome may block some script features.</li>
+                            </ul>
+                        </div>
+                        <button onclick="window.location.reload()" style="margin-top: 30px; background: #be123c; color: white; border: none; padding: 12px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s;">↻ Reload Application</button>
+                    </div>
+                `;
+            }
+        });
+    </script>
+    <script>
+        // Check if resources loaded
+        window.addEventListener('load', function() {
+            const resources = {
+                'React': typeof React !== 'undefined',
+                'ReactDOM': typeof ReactDOM !== 'undefined',
+                'Babel': typeof Babel !== 'undefined',
+                'Lucide': typeof lucide !== 'undefined'
+            };
+            const missing = Object.entries(resources).filter(([k, v]) => !v).map(([k]) => k);
+            if (missing.length > 0) {
+                console.error("Missing resources:", missing);
+                const root = document.getElementById('root');
+                if (root) {
+                    root.innerHTML = `
+                        <div style="padding: 40px; background: #fff1f2; color: #9f1239; border: 2px solid #fda4af; border-radius: 20px; font-family: sans-serif; max-width: 600px; margin: 40px auto; text-align: center;">
+                            <h2 style="font-weight: 800; font-size: 24px;">Connection Error</h2>
+                            <p style="margin-top: 10px;">The following required libraries failed to load: <b>${missing.join(', ')}</b></p>
+                            <p style="margin-top: 20px; font-size: 14px;">Please check your internet connection. This mockup requires external libraries from <b>unpkg.com</b> to function.</p>
+                            <button onclick="window.location.reload()" style="margin-top: 20px; background: #be123c; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer;">Try Again</button>
+                        </div>
+                    `;
+                }
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
         }
-      }
-    }
-  </script>
-  <style>
-    * { box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; }
-    .screen { display: none; }
-    .screen.active { display: block; }
-    .nav-item { transition: background-color 0.15s, color 0.15s; }
-    .nav-item:hover { background-color: rgba(255,255,255,0.1); }
-    .nav-item.active { background-color: rgba(255,255,255,0.15); color: white; }
-    .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
-    .badge-green { background: #dcfce7; color: #166534; }
-    .badge-red { background: #fee2e2; color: #991b1b; }
-    .badge-amber { background: #fef3c7; color: #92400e; }
-    .badge-blue { background: #dbeafe; color: #1e40af; }
-    .badge-gray { background: #f1f5f9; color: #475569; }
-    .badge-admin { background: #fee2e2; color: #991b1b; }
-    .badge-faculty { background: #dbeafe; color: #1e40af; }
-    .badge-student { background: #dcfce7; color: #166534; }
-    .card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; }
-    .btn-primary { background: hsl(222.2, 84%, 4.9%); color: white; }
-    .btn-primary:hover { background: hsl(222.2, 84%, 12%); }
-    .btn-secondary { background: #f1f5f9; color: #0f172a; border: 1px solid #e2e8f0; }
-    .btn-secondary:hover { background: #e2e8f0; }
-    .btn-destructive { background: hsl(0, 84.2%, 60.2%); color: white; }
-    .btn-destructive:hover { background: hsl(0, 84.2%, 50%); }
-    .btn-outline { background: white; color: #0f172a; border: 1px solid #e2e8f0; }
-    .btn-outline:hover { background: #f8fafc; }
-    .btn-ghost { background: transparent; color: #64748b; }
-    .btn-ghost:hover { background: #f1f5f9; }
-    .input { width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; outline: none; transition: border-color 0.15s; }
-    .input:focus { border-color: hsl(217.2, 91.2%, 59.8%); box-shadow: 0 0 0 2px hsla(217.2, 91.2%, 59.8%, 0.15); }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #e2e8f0; }
-    td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid #f1f5f9; }
-    tr:hover td { background: #f8fafc; }
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
-    .modal-overlay.open { display: flex; }
-    .modal { background: white; border-radius: 12px; width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
-    .stat-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
-    .stat-card .stat-value { font-size: 28px; font-weight: 700; color: #0f172a; }
-    .stat-card .stat-label { font-size: 13px; color: #64748b; }
-    @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); position: fixed; z-index: 40; }
-      .sidebar.open { transform: translateX(0); }
-      .main-content { margin-left: 0 !important; }
-    }
-  </style>
+        .sidebar {
+            background-color: #C0392B;
+        }
+        .sidebar-item-active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid #fff;
+        }
+        .btn-primary {
+            background-color: #C0392B;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #A93226;
+        }
+        .badge-admin { background-color: #fee2e2; color: #991b1b; }
+        .badge-faculty { background-color: #dcfce7; color: #166534; }
+        .badge-student { background-color: #dbeafe; color: #1e40af; }
+        .badge-success { background-color: #dcfce7; color: #166534; }
+        .badge-pending { background-color: #fef9c3; color: #854d0e; }
+        .badge-danger { background-color: #fee2e2; color: #991b1b; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); }
+    </style>
 </head>
-<body class="h-full bg-gray-50 text-slate-900">
-
-<!-- ==================== SCREEN 0: Login Page ==================== -->
-<section id="screen-login" class="screen active min-h-screen flex items-center justify-center bg-slate-100">
-  <div class="w-full max-w-md mx-4">
-    <div class="card p-0 shadow-lg">
-      <div class="p-8 text-center border-b border-slate-100">
-        <div class="w-14 h-14 bg-sidebar rounded-xl flex items-center justify-center mx-auto mb-4">
-          <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+<body>
+    <div id="root">
+        <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; background: #f8fafc; color: #64748b;">
+            <div style="width: 40px; height: 40px; border: 4px solid #cbd5e1; border-top-color: #C0392B; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+            <p style="margin-top: 16px; font-weight: 600;">Loading Admin Dashboard Mockup...</p>
+            <p style="font-size: 12px; margin-top: 4px;">Please ensure JavaScript is enabled and you are viewing this file in a web browser.</p>
         </div>
-        <h1 class="text-2xl font-bold mb-1">CEC Student Digital Platform</h1>
-        <p class="text-sm text-slate-500">City Engineering College, Bengaluru</p>
-        <p class="text-sm text-slate-400 mt-2">Sign in to your account</p>
-      </div>
-      <div class="p-8 space-y-5">
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
-          <input type="email" class="input" placeholder="you@cec.edu.in" value="admin@cec.edu.in">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
-          <div class="relative">
-            <input type="password" class="input pr-16" value="••••••••">
-            <button class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 hover:text-slate-600">Show</button>
-          </div>
-        </div>
-        <div id="loginError" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-md">
-          Invalid credentials. Please try again.
-        </div>
-        <button class="btn btn-primary w-full justify-center py-2.5" onclick="showRole('admin')">
-          Sign In
-        </button>
-      </div>
-      <div class="px-8 pb-6 flex gap-2 justify-center">
-        <button class="text-xs text-accent hover:underline" onclick="showRole('admin')">Demo: Admin</button>
-        <span class="text-xs text-slate-300">|</span>
-        <button class="text-xs text-accent hover:underline" onclick="showRole('faculty')">Demo: Faculty</button>
-        <span class="text-xs text-slate-300">|</span>
-        <button class="text-xs text-accent hover:underline" onclick="showRole('student')">Demo: Student</button>
-      </div>
     </div>
-  </div>
-</section>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
 
-<!-- ==================== APP SHELL (Header + Sidebar + Content) ==================== -->
-<div id="appShell" style="display:none;">
+    <script type="text/babel" data-presets="react">
+        console.log("Mockup Script: Starting initialization...");
+        const { useState, useEffect, useMemo } = React;
 
-<!-- Header -->
-<header class="fixed top-0 left-0 right-0 h-14 bg-sidebar text-sidebar-fg border-b border-slate-700 flex items-center justify-between px-4 z-50">
-  <div class="flex items-center gap-3">
-    <button onclick="toggleSidebar()" class="md:hidden p-1.5 rounded hover:bg-white/10">
-      <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-        <i data-lucide="graduation-cap" class="w-5 h-5 text-white"></i>
-      </div>
-      <span class="font-semibold text-lg">CEC Student</span>
-    </div>
-  </div>
-  <div class="flex items-center gap-3">
-    <span id="headerUserName" class="text-sm text-slate-300">CEC Admin</span>
-    <span id="headerRoleBadge" class="badge badge-admin text-xs">Admin</span>
-    <div id="headerAvatar" class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-sm font-semibold text-white">CA</div>
-    <button class="text-sm text-slate-400 hover:text-white" onclick="logout()">
-      <i data-lucide="log-out" class="w-4 h-4"></i>
-    </button>
-  </div>
-</header>
+        // Custom Hook for Toasts
+        const useToast = () => {
+            const [toasts, setToasts] = useState([]);
+            const addToast = (message, type = 'info') => {
+                const id = Math.random().toString(36).substr(2, 9);
+                setToasts(prev => [...prev, { id, message, type }]);
+                setTimeout(() => {
+                    setToasts(prev => prev.filter(t => t.id !== id));
+                }, 3000);
+            };
+            return { toasts, addToast };
+        };
 
-<!-- Sidebar -->
-<aside id="sidebar" class="sidebar fixed top-14 left-0 bottom-0 w-64 bg-sidebar text-sidebar-fg border-r border-slate-700 overflow-y-auto z-40">
-  <nav class="py-4">
-    <!-- Admin Nav -->
-    <div id="nav-admin" class="px-3 mb-2" style="display:none;">
-      <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Administration</p>
-      <a onclick="showScreen('admin-dashboard')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer active" data-screen="admin-dashboard">
-        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
-      </a>
-      <a onclick="showScreen('users')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer" data-screen="users">
-        <i data-lucide="users" class="w-4 h-4"></i> Users
-      </a>
-      <a onclick="showScreen('departments')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer" data-screen="departments">
-        <i data-lucide="building-2" class="w-4 h-4"></i> Departments
-      </a>
-      <a onclick="showScreen('assignments')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer" data-screen="assignments">
-        <i data-lucide="user-check" class="w-4 h-4"></i> Faculty Assignments
-      </a>
-    </div>
+        // Icons component (React-stable version)
+        const Icon = ({ name, size = 20, className = "" }) => {
+            const [svgHtml, setSvgHtml] = useState("");
 
-    <!-- Faculty Nav -->
-    <div id="nav-faculty" class="px-3 mb-2" style="display:none;">
-      <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Faculty</p>
-      <a onclick="showScreen('faculty-dashboard')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer active" data-screen="faculty-dashboard">
-        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="clipboard-list" class="w-4 h-4"></i> Attendance <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="file-text" class="w-4 h-4"></i> Marks <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="megaphone" class="w-4 h-4"></i> Announcements <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-    </div>
+            useEffect(() => {
+                const renderIcon = () => {
+                    if (window.lucide && window.lucide.icons && window.lucide.icons[name]) {
+                        const svg = window.lucide.icons[name].toSvg({
+                            width: size,
+                            height: size,
+                            class: className,
+                            'stroke-width': 2,
+                            'stroke-linecap': 'round',
+                            'stroke-linejoin': 'round'
+                        });
+                        setSvgHtml(svg);
+                    } else {
+                        // Retry if Lucide hasn't loaded yet
+                        setTimeout(renderIcon, 50);
+                    }
+                };
+                renderIcon();
+            }, [name, size, className]);
 
-    <!-- Student Nav -->
-    <div id="nav-student" class="px-3 mb-2" style="display:none;">
-      <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Student</p>
-      <a onclick="showScreen('student-dashboard')" class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-300 cursor-pointer active" data-screen="student-dashboard">
-        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="clipboard-list" class="w-4 h-4"></i> Attendance <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="file-text" class="w-4 h-4"></i> Marks <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-      <a class="nav-item flex items-center gap-3 px-3 py-2 rounded-md text-sm text-slate-500 cursor-not-allowed">
-        <i data-lucide="indian-rupee" class="w-4 h-4"></i> Fees <span class="text-xs text-slate-600 ml-auto">Soon</span>
-      </a>
-    </div>
+            if (!svgHtml) return <div className={`inline-block ${className}`} style={{ width: size, height: size }}></div>;
 
-    <div class="border-t border-slate-700 my-3"></div>
-    <div class="px-3">
-      <div class="px-3 py-3">
-        <p id="sidebarUserName" class="text-sm font-medium text-white">CEC Admin</p>
-        <p id="sidebarUserEmail" class="text-xs text-slate-400">admin@cec.edu.in</p>
-      </div>
-    </div>
-  </nav>
-</aside>
+            return <span className="inline-flex shrink-0" dangerouslySetInnerHTML={{ __html: svgHtml }} />;
+        };
 
-<!-- Main Content -->
-<main id="mainContent" class="main-content ml-64 mt-14 min-h-screen">
+        // --- Auth & Layout Components ---
 
-<!-- ==================== SCREEN 1: Admin Dashboard ==================== -->
-<section id="screen-admin-dashboard" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Admin</span> <span>/</span> <span class="text-slate-900">Dashboard</span>
-  </div>
-  <h1 class="text-3xl font-bold tracking-tight mb-6">Dashboard</h1>
+        const LoginPage = ({ onLogin }) => {
+            const [email, setEmail] = useState("admin@cec.edu");
+            const [password, setPassword] = useState("password123");
+            const [isLoading, setIsLoading] = useState(false);
 
-  <!-- Stat Cards -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-    <div class="stat-card">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
-          <i data-lucide="users" class="w-5 h-5 text-green-600"></i>
-        </div>
-        <div class="stat-label">Total Students</div>
-      </div>
-      <div class="stat-value">1,247</div>
-      <div class="text-xs text-green-600 mt-1">+23 this semester</div>
-    </div>
-    <div class="stat-card">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
-          <i data-lucide="user-check" class="w-5 h-5 text-blue-600"></i>
-        </div>
-        <div class="stat-label">Total Faculty</div>
-      </div>
-      <div class="stat-value">87</div>
-      <div class="text-xs text-blue-600 mt-1">5 new this year</div>
-    </div>
-    <div class="stat-card">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center">
-          <i data-lucide="building-2" class="w-5 h-5 text-purple-600"></i>
-        </div>
-        <div class="stat-label">Departments</div>
-      </div>
-      <div class="stat-value">8</div>
-      <div class="text-xs text-slate-500 mt-1">42 active sections</div>
-    </div>
-    <div class="stat-card">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-          <i data-lucide="shield-check" class="w-5 h-5 text-amber-600"></i>
-        </div>
-        <div class="stat-label">Active Users</div>
-      </div>
-      <div class="stat-value">1,329</div>
-      <div class="text-xs text-red-500 mt-1">5 inactive accounts</div>
-    </div>
-  </div>
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setIsLoading(true);
+                // Simulate network delay
+                setTimeout(() => {
+                    setIsLoading(false);
+                    onLogin();
+                }, 1200);
+            };
 
-  <!-- Recent Activity -->
-  <div class="card p-5">
-    <h2 class="text-lg font-semibold mb-4">Recent Activity</h2>
-    <div class="space-y-4">
-      <div class="flex items-center gap-4 py-2">
-        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center"><i data-lucide="user-plus" class="w-4 h-4 text-green-600"></i></div>
-        <div class="flex-1">
-          <p class="text-sm"><span class="font-medium">Admin</span> imported 48 students via CSV</p>
-          <p class="text-xs text-slate-400">2 hours ago</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4 py-2">
-        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center"><i data-lucide="user-check" class="w-4 h-4 text-blue-600"></i></div>
-        <div class="flex-1">
-          <p class="text-sm"><span class="font-medium">Admin</span> assigned Dr. Ramesh to CSE-3A (Data Structures)</p>
-          <p class="text-xs text-slate-400">3 hours ago</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4 py-2">
-        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center"><i data-lucide="building-2" class="w-4 h-4 text-purple-600"></i></div>
-        <div class="flex-1">
-          <p class="text-sm"><span class="font-medium">Admin</span> created section 5A under CSE department</p>
-          <p class="text-xs text-slate-400">5 hours ago</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-4 py-2">
-        <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center"><i data-lucide="key-round" class="w-4 h-4 text-amber-600"></i></div>
-        <div class="flex-1">
-          <p class="text-sm"><span class="font-medium">Admin</span> reset password for priya@cec.edu.in</p>
-          <p class="text-xs text-slate-400">1 day ago</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            return (
+                <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6 bg-gradient-to-br from-slate-50 to-slate-200">
+                    <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl border border-slate-100 p-10 animate-in zoom-in-95 duration-500">
+                        <div className="flex flex-col items-center mb-10">
+                            <div className="w-16 h-16 bg-[#C0392B] rounded-2xl flex items-center justify-center shadow-lg shadow-red-200 mb-6">
+                                <Icon name="graduation-cap" className="text-white" size={32} />
+                            </div>
+                            <h1 className="text-3xl font-black text-slate-800 tracking-tight">CEC Admin</h1>
+                            <p className="text-slate-500 font-medium text-sm mt-2">City Engineering College Portal</p>
+                        </div>
 
-<!-- ==================== SCREEN 2: User Management ==================== -->
-<section id="screen-users" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Admin</span> <span>/</span> <span class="text-slate-900">Users</span>
-  </div>
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold tracking-tight">Users</h1>
-    <div class="flex gap-2">
-      <button class="btn btn-secondary" onclick="toggleModal('importModal')">
-        <i data-lucide="upload" class="w-4 h-4"></i> Bulk Import
-      </button>
-      <button class="btn btn-primary" onclick="toggleModal('createUserModal')">
-        <i data-lucide="plus" class="w-4 h-4"></i> Create User
-      </button>
-    </div>
-  </div>
-  <div class="flex flex-col sm:flex-row gap-3 mb-5">
-    <div class="flex-1">
-      <input type="search" class="input" placeholder="Search by name, email, or USN...">
-    </div>
-    <select class="input" style="width:auto">
-      <option>All Roles</option><option>Admin</option><option>Faculty</option><option>Student</option>
-    </select>
-    <select class="input" style="width:auto">
-      <option>All Status</option><option>Active</option><option>Inactive</option>
-    </select>
-  </div>
-  <p class="text-sm text-slate-500 mb-3">Showing 7 of 1,334 users</p>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Email Address</label>
+                                <div className="relative">
+                                    <Icon name="mail" className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                                    <input 
+                                        type="email" 
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:bg-white transition-all shadow-sm" 
+                                    />
+                                </div>
+                            </div>
 
-  <div class="card overflow-hidden">
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>USN / Employee ID</th>
-          <th>Dept</th>
-          <th>Role</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="font-medium">CEC Admin</td>
-          <td class="text-slate-500">admin@cec.edu.in</td>
-          <td class="text-slate-400">—</td>
-          <td class="text-slate-400">—</td>
-          <td><span class="badge badge-admin">Admin</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Dr. Ramesh Kumar</td>
-          <td class="text-slate-500">ramesh@cec.edu.in</td>
-          <td class="font-mono text-sm">CEC-F-001</td>
-          <td>CSE</td>
-          <td><span class="badge badge-faculty">Faculty</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Prof. Sunita Rao</td>
-          <td class="text-slate-500">sunita@cec.edu.in</td>
-          <td class="font-mono text-sm">CEC-F-002</td>
-          <td>CSE</td>
-          <td><span class="badge badge-faculty">Faculty</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Prof. Anil Kumar</td>
-          <td class="text-slate-500">anil@cec.edu.in</td>
-          <td class="font-mono text-sm">CEC-F-003</td>
-          <td>ISE</td>
-          <td><span class="badge badge-faculty">Faculty</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Rahul Sharma</td>
-          <td class="text-slate-500">rahul@cec.edu.in</td>
-          <td class="font-mono text-sm">1CG21CS001</td>
-          <td>CSE</td>
-          <td><span class="badge badge-student">Student</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Priya Patel</td>
-          <td class="text-slate-500">priya@cec.edu.in</td>
-          <td class="font-mono text-sm">1CG21CS002</td>
-          <td>CSE</td>
-          <td><span class="badge badge-student">Student</span></td>
-          <td><span class="badge badge-green">Active</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium text-slate-400">Inactive User</td>
-          <td class="text-slate-400">inactive@cec.edu.in</td>
-          <td class="font-mono text-sm text-slate-400">1CG21CS099</td>
-          <td class="text-slate-400">CSE</td>
-          <td><span class="badge badge-student">Student</span></td>
-          <td><span class="badge badge-red">Inactive</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded">Edit</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="flex items-center justify-between mt-4">
-    <p class="text-sm text-slate-500">Page 1 of 54</p>
-    <div class="flex gap-1">
-      <button class="btn btn-outline text-sm px-3 py-1" disabled>&lt; Prev</button>
-      <button class="btn btn-primary text-sm px-3 py-1">1</button>
-      <button class="btn btn-outline text-sm px-3 py-1">2</button>
-      <button class="btn btn-outline text-sm px-3 py-1">3</button>
-      <button class="btn btn-outline text-sm px-3 py-1">Next &gt;</button>
-    </div>
-  </div>
-</section>
+                            <div>
+                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Password</label>
+                                <div className="relative">
+                                    <Icon name="lock" className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                                    <input 
+                                        type="password" 
+                                        required
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:bg-white transition-all shadow-sm"
+                                    />
+                                </div>
+                            </div>
 
-<!-- ==================== SCREEN 3: Department Management ==================== -->
-<section id="screen-departments" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Admin</span> <span>/</span> <span class="text-slate-900">Departments</span>
-  </div>
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold tracking-tight">Departments</h1>
-    <button class="btn btn-primary" onclick="toggleModal('createDeptModal')">
-      <i data-lucide="plus" class="w-4 h-4"></i> New Department
-    </button>
-  </div>
-  <p class="text-sm text-slate-500 mb-4">8 departments</p>
+                            <button 
+                                type="submit" 
+                                disabled={isLoading}
+                                className="w-full py-4 btn-primary rounded-2xl font-bold transition-all shadow-lg shadow-red-200 flex items-center justify-center gap-3 relative overflow-hidden group"
+                            >
+                                {isLoading ? (
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                ) : (
+                                    <>
+                                        <span>Sign In to Dashboard</span>
+                                        <Icon name="arrow-right" size={18} className="transition-transform group-hover:translate-x-1" />
+                                    </>
+                                )}
+                            </button>
+                        </form>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-    <!-- Dept 1 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer" onclick="showScreen('dept-detail')">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">CSE</h3>
-          <p class="text-sm text-slate-500">Computer Science and Engineering</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 6 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 12 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 248 Students</span>
-      </div>
-    </div>
-    <!-- Dept 2 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">ISE</h3>
-          <p class="text-sm text-slate-500">Information Science and Engineering</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 4 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 10 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 186 Students</span>
-      </div>
-    </div>
-    <!-- Dept 3 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">ECE</h3>
-          <p class="text-sm text-slate-500">Electronics and Communication Engg</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 5 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 11 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 210 Students</span>
-      </div>
-    </div>
-    <!-- Dept 4 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">EEE</h3>
-          <p class="text-sm text-slate-500">Electrical and Electronics Engg</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 4 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 9 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 142 Students</span>
-      </div>
-    </div>
-    <!-- Dept 5 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">ME</h3>
-          <p class="text-sm text-slate-500">Mechanical Engineering</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 5 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 11 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 178 Students</span>
-      </div>
-    </div>
-    <!-- Dept 6 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">CE</h3>
-          <p class="text-sm text-slate-500">Civil Engineering</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 4 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 8 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 96 Students</span>
-      </div>
-    </div>
-    <!-- Dept 7 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">AIML</h3>
-          <p class="text-sm text-slate-500">AI and Machine Learning</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 4 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 8 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 120 Students</span>
-      </div>
-    </div>
-    <!-- Dept 8 -->
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer">
-      <div class="flex items-start justify-between mb-3">
-        <div>
-          <h3 class="font-semibold text-lg">MBA</h3>
-          <p class="text-sm text-slate-500">Master of Business Administration</p>
-        </div>
-        <span class="badge badge-blue">Active</span>
-      </div>
-      <div class="flex gap-4 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="layout-grid" class="w-3.5 h-3.5"></i> 2 Sections</span>
-        <span class="flex items-center gap-1"><i data-lucide="user-check" class="w-3.5 h-3.5"></i> 6 Faculty</span>
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 67 Students</span>
-      </div>
-    </div>
-  </div>
-</section>
+                        <div className="mt-8 pt-8 border-t border-slate-50 text-center">
+                            <p className="text-xs text-slate-400 font-medium">Forgot your credentials? Contact IT Support.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
-<!-- ==================== SCREEN 3b: Department Detail (CSE) ==================== -->
-<section id="screen-dept-detail" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <a onclick="showScreen('departments')" class="hover:text-accent cursor-pointer">Departments</a> <span>/</span> <span class="text-slate-900">CSE</span>
-  </div>
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h1 class="text-3xl font-bold tracking-tight">Computer Science and Engineering</h1>
-      <p class="text-sm text-slate-500 mt-1">Department Code: <span class="font-mono font-medium">CSE</span></p>
-    </div>
-    <button class="btn btn-primary" onclick="toggleModal('createSectionModal')">
-      <i data-lucide="plus" class="w-4 h-4"></i> Add Section
-    </button>
-  </div>
+        const SidebarItem = ({ icon, label, id, active, onClick }) => (
+            <div 
+                onClick={() => onClick(id)}
+                className={`flex items-center gap-3 px-6 py-4 cursor-pointer transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10 ${active ? 'sidebar-item-active text-white' : ''}`}
+            >
+                <Icon name={icon} />
+                <span className="font-medium text-sm">{label}</span>
+            </div>
+        );
 
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-    <div class="stat-card">
-      <div class="stat-label">Sections</div>
-      <div class="stat-value">6</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Faculty</div>
-      <div class="stat-value">12</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Students</div>
-      <div class="stat-value">248</div>
-    </div>
-  </div>
+        // --- Pages ---
 
-  <div class="card overflow-hidden">
-    <div class="px-5 py-3 border-b font-semibold text-sm text-slate-700">Sections</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Section</th>
-          <th>Semester</th>
-          <th>Academic Year</th>
-          <th>Students</th>
-          <th>Faculty Assigned</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="font-medium">A</td>
-          <td>3rd Semester</td>
-          <td>2025-26</td>
-          <td>64</td>
-          <td><span class="text-sm">Dr. Ramesh Kumar (Data Structures)</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">B</td>
-          <td>3rd Semester</td>
-          <td>2025-26</td>
-          <td>62</td>
-          <td><span class="text-sm">Dr. Ramesh Kumar (Data Structures)</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">A</td>
-          <td>5th Semester</td>
-          <td>2025-26</td>
-          <td>58</td>
-          <td><span class="text-sm">Prof. Sunita Rao (DBMS)</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">B</td>
-          <td>5th Semester</td>
-          <td>2025-26</td>
-          <td>56</td>
-          <td><span class="text-sm text-slate-400">Unassigned</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">A</td>
-          <td>7th Semester</td>
-          <td>2025-26</td>
-          <td>45</td>
-          <td><span class="text-sm text-slate-400">Unassigned</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">B</td>
-          <td>7th Semester</td>
-          <td>2025-26</td>
-          <td>43</td>
-          <td><span class="text-sm text-slate-400">Unassigned</span></td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Delete</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+        const DashboardHome = () => (
+            <div className="space-y-6 animate-in fade-in duration-500">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <p className="text-slate-500 text-sm font-medium">Active Users</p>
+                                <h3 className="text-2xl font-bold mt-1 text-slate-800">1,284</h3>
+                            </div>
+                            <div className="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                                <Icon name="users" />
+                            </div>
+                        </div>
+                        <div className="mt-4 flex items-center text-xs text-green-600">
+                            <Icon name="trending-up" size={14} className="mr-1" />
+                            <span>+4.5% from last month</span>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <p className="text-slate-500 text-sm font-medium">Pending Requests</p>
+                                <h3 className="text-2xl font-bold mt-1 text-slate-800">42</h3>
+                            </div>
+                            <div className="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                                <Icon name="clock" />
+                            </div>
+                        </div>
+                        <div className="mt-4 flex items-center text-xs text-slate-500">
+                            <span>Requires urgent attention</span>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <p className="text-slate-500 text-sm font-medium">Storage Usage</p>
+                                <h3 className="text-2xl font-bold mt-1 text-slate-800">64%</h3>
+                            </div>
+                            <div className="p-2 bg-purple-50 text-purple-600 rounded-lg">
+                                <Icon name="database" />
+                            </div>
+                        </div>
+                        <div className="mt-4 w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-purple-600 h-full" style={{ width: '64%' }}></div>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <p className="text-slate-500 text-sm font-medium">System Uptime</p>
+                                <h3 className="text-2xl font-bold mt-1 text-slate-800">99.9%</h3>
+                            </div>
+                            <div className="p-2 bg-green-50 text-green-600 rounded-lg">
+                                <Icon name="activity" />
+                            </div>
+                        </div>
+                        <div className="mt-4 flex items-center text-xs text-green-600">
+                            <span>Service: Stable</span>
+                        </div>
+                    </div>
+                </div>
 
-<!-- ==================== SCREEN 4: Faculty Assignments ==================== -->
-<section id="screen-assignments" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Admin</span> <span>/</span> <span class="text-slate-900">Faculty Assignments</span>
-  </div>
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold tracking-tight">Faculty Assignments</h1>
-    <button class="btn btn-primary" onclick="toggleModal('createAssignmentModal')">
-      <i data-lucide="plus" class="w-4 h-4"></i> New Assignment
-    </button>
-  </div>
-  <p class="text-sm text-slate-500 mb-4">4 active assignments</p>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+                        <h4 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
+                            <Icon name="history" size={18} /> Recent Activity Feed
+                        </h4>
+                        <div className="space-y-6">
+                            {[
+                                { user: "Dr. Ananya Sharma", action: "published new course material", target: "Data Structures (CS301)", time: "10 mins ago" },
+                                { user: "Admin", action: "approved fee waiver for", target: "Rahul Verma (1CE22AI045)", time: "45 mins ago" },
+                                { user: "Pooja Hegde", action: "submitted a grievance regarding", target: "Library access hours", time: "2 hours ago" },
+                                { user: "Prof. Rajesh Kumar", action: "updated attendance for", target: "Section B - DBMS", time: "5 hours ago" }
+                            ].map((item, i) => (
+                                <div key={i} className="flex gap-4 border-l-2 border-slate-100 pl-4 py-1 relative">
+                                    <div className="absolute -left-1.5 top-2 w-3 h-3 rounded-full bg-slate-300 border-2 border-white"></div>
+                                    <div>
+                                        <p className="text-sm text-slate-600">
+                                            <span className="font-semibold text-slate-800">{item.user}</span> {item.action} <span className="font-medium text-slate-700">{item.target}</span>
+                                        </p>
+                                        <p className="text-xs text-slate-400 mt-1">{item.time}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+                        <h4 className="font-bold text-slate-800 mb-6">System Health</h4>
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span className="text-sm font-medium text-slate-600">Database Cluster</span>
+                                </div>
+                                <span className="text-xs font-bold text-green-600">HEALTHY</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span className="text-sm font-medium text-slate-600">File Storage</span>
+                                </div>
+                                <span className="text-xs font-bold text-green-600">HEALTHY</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                                    <span className="text-sm font-medium text-slate-600">Backup Service</span>
+                                </div>
+                                <span className="text-xs font-bold text-amber-600">WARNING</span>
+                            </div>
+                            <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span className="text-sm font-medium text-slate-600">Auth Gateway</span>
+                                </div>
+                                <span className="text-xs font-bold text-green-600">HEALTHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
 
-  <div class="card overflow-hidden">
-    <table>
-      <thead>
-        <tr>
-          <th>Faculty</th>
-          <th>Department</th>
-          <th>Section</th>
-          <th>Subject</th>
-          <th>Assigned Since</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="font-medium">Dr. Ramesh Kumar</td>
-          <td>CSE</td>
-          <td>3rd Sem — A</td>
-          <td>Data Structures</td>
-          <td class="text-slate-500">Jan 15, 2026</td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Remove</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Dr. Ramesh Kumar</td>
-          <td>CSE</td>
-          <td>3rd Sem — B</td>
-          <td>Data Structures</td>
-          <td class="text-slate-500">Jan 15, 2026</td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Remove</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Prof. Sunita Rao</td>
-          <td>CSE</td>
-          <td>5th Sem — A</td>
-          <td>DBMS</td>
-          <td class="text-slate-500">Jan 15, 2026</td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Remove</button></td>
-        </tr>
-        <tr>
-          <td class="font-medium">Prof. Anil Kumar</td>
-          <td>ISE</td>
-          <td>3rd Sem — A</td>
-          <td>Operating Systems</td>
-          <td class="text-slate-500">Jan 16, 2026</td>
-          <td><button class="btn-ghost text-sm px-2 py-1 rounded text-red-500">Remove</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+        const UserManagement = ({ users, setUsers, onAction }) => {
+            const [searchTerm, setSearchTerm] = useState("");
+            const [isAddingUser, setIsAddingUser] = useState(false);
+            const [newUser, setNewUser] = useState({ name: "", email: "", role: "Student", dept: "CSE", status: "Active" });
 
-<!-- ==================== SCREEN 5: Faculty Dashboard ==================== -->
-<section id="screen-faculty-dashboard" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Faculty</span> <span>/</span> <span class="text-slate-900">Dashboard</span>
-  </div>
-  <h1 class="text-3xl font-bold tracking-tight mb-2">Welcome, Dr. Ramesh Kumar</h1>
-  <p class="text-slate-500 mb-6">Department: CSE | Employee ID: <span class="font-mono">CEC-F-001</span></p>
+            const handleAddUser = (e) => {
+                e.preventDefault();
+                const id = "U" + Math.floor(Math.random() * 900 + 100);
+                setUsers([...users, { id, ...newUser }]);
+                setIsAddingUser(false);
+                setNewUser({ name: "", email: "", role: "Student", dept: "CSE", status: "Active" });
+                onAction("User " + newUser.name + " added successfully!");
+            };
 
-  <h2 class="text-xl font-semibold mb-4">My Sections</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-blue-500">
-      <h3 class="font-semibold text-lg mb-1">CSE — 3rd Sem A</h3>
-      <p class="text-sm text-slate-500 mb-3">Data Structures</p>
-      <div class="flex gap-3 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 64 students</span>
-      </div>
-      <div class="flex gap-2 mt-4">
-        <button class="btn btn-secondary text-xs py-1 px-2">
-          <i data-lucide="clipboard-list" class="w-3 h-3"></i> Attendance
-        </button>
-        <button class="btn btn-secondary text-xs py-1 px-2">
-          <i data-lucide="file-text" class="w-3 h-3"></i> Marks
-        </button>
-      </div>
-    </div>
-    <div class="card p-5 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-blue-500">
-      <h3 class="font-semibold text-lg mb-1">CSE — 3rd Sem B</h3>
-      <p class="text-sm text-slate-500 mb-3">Data Structures</p>
-      <div class="flex gap-3 text-sm text-slate-600">
-        <span class="flex items-center gap-1"><i data-lucide="users" class="w-3.5 h-3.5"></i> 62 students</span>
-      </div>
-      <div class="flex gap-2 mt-4">
-        <button class="btn btn-secondary text-xs py-1 px-2">
-          <i data-lucide="clipboard-list" class="w-3 h-3"></i> Attendance
-        </button>
-        <button class="btn btn-secondary text-xs py-1 px-2">
-          <i data-lucide="file-text" class="w-3 h-3"></i> Marks
-        </button>
-      </div>
-    </div>
-  </div>
+            return (
+                <div className="space-y-6">
+                    {isAddingUser && (
+                        <div className="bg-white p-6 rounded-xl border-2 border-red-100 shadow-xl animate-in zoom-in-95 duration-200">
+                            <div className="flex justify-between items-center mb-6">
+                                <h4 className="font-black text-slate-800 flex items-center gap-2">
+                                    <Icon name="user-plus" className="text-red-600" /> Register New System User
+                                </h4>
+                                <button onClick={() => setIsAddingUser(false)} className="text-slate-400 hover:text-red-600"><Icon name="x" size={20} /></button>
+                            </div>
+                            <form onSubmit={handleAddUser} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div>
+                                    <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Full Name</label>
+                                    <input required value={newUser.name} onChange={e => setNewUser({...newUser, name: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-red-500/10 outline-none" placeholder="e.g. Rahul Verma" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Email Address</label>
+                                    <input required type="email" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-red-500/10 outline-none" placeholder="rahul@cec.edu" />
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Role Type</label>
+                                    <select value={newUser.role} onChange={e => setNewUser({...newUser, role: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none">
+                                        <option>Student</option>
+                                        <option>Faculty</option>
+                                        <option>Admin</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Department</label>
+                                    <select value={newUser.dept} onChange={e => setNewUser({...newUser, dept: e.target.value})} className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl outline-none">
+                                        <option>CSE</option>
+                                        <option>ISE</option>
+                                        <option>ECE</option>
+                                        <option>ME</option>
+                                        <option>AI&ML</option>
+                                    </select>
+                                </div>
+                                <div className="lg:col-span-2 flex items-end gap-3">
+                                    <button type="submit" className="flex-1 py-3 btn-primary rounded-xl font-bold shadow-lg shadow-red-200">Save User Account</button>
+                                    <button type="button" onClick={() => setIsAddingUser(false)} className="px-6 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold">Discard</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
 
-  <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
-  <div class="flex gap-3">
-    <button class="btn btn-outline">
-      <i data-lucide="clipboard-list" class="w-4 h-4"></i> Mark Attendance
-    </button>
-    <button class="btn btn-outline">
-      <i data-lucide="file-text" class="w-4 h-4"></i> Enter Marks
-    </button>
-    <button class="btn btn-outline">
-      <i data-lucide="megaphone" class="w-4 h-4"></i> Post Announcement
-    </button>
-  </div>
-</section>
+                    <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden animate-in fade-in duration-500">
+                        <div className="p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div className="relative flex-1">
+                                <Icon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                                <input 
+                                    type="text" 
+                                    placeholder="Search users by name, USN, or department..." 
+                                    className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-100 focus:border-red-400"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
+                            <div className="flex gap-2">
+                                <button 
+                                    onClick={() => onAction("Bulk Import CSV Initiated")}
+                                    className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"
+                                >
+                                    <Icon name="file-up" size={16} /> Bulk Import
+                                </button>
+                                <button onClick={() => setIsAddingUser(true)} className="flex items-center gap-2 px-4 py-2 btn-primary rounded-lg text-sm font-medium">
+                                    <Icon name="user-plus" size={16} /> Add User
+                                </button>
+                            </div>
+                        </div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                            <thead className="bg-slate-50 text-slate-500 text-xs font-semibold uppercase">
+                                <tr>
+                                    <th className="px-6 py-4">User</th>
+                                    <th className="px-6 py-4">Role</th>
+                                    <th className="px-6 py-4">Department</th>
+                                    <th className="px-6 py-4">Status</th>
+                                    <th className="px-6 py-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                                {users.filter(u => u.name.toLowerCase().includes(searchTerm.toLowerCase()) || u.dept.toLowerCase().includes(searchTerm.toLowerCase())).map(user => (
+                                    <tr key={user.id} className="hover:bg-slate-50/50 transition-colors">
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 text-xs font-bold">
+                                                    {user.name.split(' ').map(n => n[0]).join('')}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm font-semibold text-slate-800">{user.name}</p>
+                                                    <p className="text-xs text-slate-500">{user.email}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${
+                                                user.role === 'Admin' ? 'badge-admin' : user.role === 'Faculty' ? 'badge-faculty' : 'badge-student'
+                                            }`}>
+                                                {user.role}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-slate-600">{user.dept}</td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                                <span className="text-sm text-slate-600">{user.status}</span>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4 text-right">
+                                            <div className="flex justify-end gap-2 text-slate-400">
+                                                <button onClick={() => onAction("Editing user " + user.name)} className="hover:text-blue-500"><Icon name="edit-2" size={16} /></button>
+                                                <button onClick={() => onAction("Status toggled for " + user.name)} className="hover:text-amber-500"><Icon name="slash" size={16} /></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
-<!-- ==================== SCREEN 6: Student Dashboard ==================== -->
-<section id="screen-student-dashboard" class="screen p-6">
-  <div class="flex items-center gap-2 text-sm text-slate-500 mb-4">
-    <span>Student</span> <span>/</span> <span class="text-slate-900">Dashboard</span>
-  </div>
-  <h1 class="text-3xl font-bold tracking-tight mb-2">Welcome, Rahul Sharma</h1>
-  <p class="text-slate-500 mb-6">USN: <span class="font-mono">1CG21CS001</span> | CSE | 3rd Semester | Section A | 2025-26</p>
+        const DeptConfig = ({ departments, setDepartments, onAction }) => {
+            const [selectedDept, setSelectedDept] = useState(null);
+            const [isAddingDept, setIsAddingDept] = useState(false);
+            const [newDept, setNewDept] = useState({ name: "", code: "" });
+            
+            const handleAddCourse = (deptId, courseName) => {
+                if (!courseName) return;
+                setDepartments(departments.map(d => 
+                    d.id === deptId ? { ...d, courses: [...d.courses, courseName] } : d
+                ));
+            };
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-    <div class="card p-5 border-l-4 border-l-green-500">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
-          <i data-lucide="clipboard-list" class="w-5 h-5 text-green-600"></i>
-        </div>
-        <div class="stat-label">Attendance</div>
-      </div>
-      <div class="stat-value text-green-600">82%</div>
-      <div class="w-full bg-green-100 rounded-full h-2 mt-2">
-        <div class="bg-green-500 h-2 rounded-full" style="width: 82%"></div>
-      </div>
-      <div class="text-xs text-slate-500 mt-1">Min required: 75%</div>
-    </div>
-    <div class="card p-5 border-l-4 border-l-blue-500">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
-          <i data-lucide="trophy" class="w-5 h-5 text-blue-600"></i>
-        </div>
-        <div class="stat-label">CGPA</div>
-      </div>
-      <div class="stat-value text-blue-600">8.4</div>
-      <div class="text-xs text-slate-500 mt-2">Last Sem SGPA: 8.6</div>
-    </div>
-    <div class="card p-5 border-l-4 border-l-amber-500">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
-          <i data-lucide="indian-rupee" class="w-5 h-5 text-amber-600"></i>
-        </div>
-        <div class="stat-label">Fees</div>
-      </div>
-      <div class="stat-value text-green-600">Paid</div>
-      <div class="text-xs text-slate-500 mt-2">Next due: Jul 2026</div>
-    </div>
-  </div>
+            const handleDeleteDept = (id, name) => {
+                if(confirm(`Are you sure you want to delete ${name}? All associated courses and faculty links will be severed.`)) {
+                    setDepartments(departments.filter(d => d.id !== id));
+                    onAction(`${name} has been removed from system.`);
+                }
+            };
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-    <div class="card p-5">
-      <h2 class="text-lg font-semibold mb-4">Recent Announcements</h2>
-      <div class="space-y-3">
-        <div class="py-2 border-b border-slate-100">
-          <p class="text-sm font-medium">IA-1 Marks Released</p>
-          <p class="text-xs text-slate-500">Dr. Ramesh Kumar — 2 days ago</p>
-        </div>
-        <div class="py-2 border-b border-slate-100">
-          <p class="text-sm font-medium">Lab session rescheduled to Thursday</p>
-          <p class="text-xs text-slate-500">Prof. Sunita Rao — 5 days ago</p>
-        </div>
-        <div class="py-2">
-          <p class="text-sm font-medium">Semester fee deadline extended</p>
-          <p class="text-xs text-slate-500">Admin — 1 week ago</p>
-        </div>
-      </div>
-    </div>
-    <div class="card p-5">
-      <h2 class="text-lg font-semibold mb-4">Upcoming</h2>
-      <div class="space-y-3">
-        <div class="flex gap-3 py-2 border-b border-slate-100">
-          <div class="w-10 h-10 rounded-lg bg-red-50 flex flex-col items-center justify-center text-red-600">
-            <span class="text-xs font-bold">MAR</span>
-            <span class="text-sm font-bold">15</span>
-          </div>
-          <div>
-            <p class="text-sm font-medium">IA-2 Examination</p>
-            <p class="text-xs text-slate-500">Data Structures</p>
-          </div>
-        </div>
-        <div class="flex gap-3 py-2 border-b border-slate-100">
-          <div class="w-10 h-10 rounded-lg bg-blue-50 flex flex-col items-center justify-center text-blue-600">
-            <span class="text-xs font-bold">MAR</span>
-            <span class="text-sm font-bold">20</span>
-          </div>
-          <div>
-            <p class="text-sm font-medium">Lab Assignment Due</p>
-            <p class="text-xs text-slate-500">DBMS</p>
-          </div>
-        </div>
-        <div class="flex gap-3 py-2">
-          <div class="w-10 h-10 rounded-lg bg-green-50 flex flex-col items-center justify-center text-green-600">
-            <span class="text-xs font-bold">APR</span>
-            <span class="text-sm font-bold">01</span>
-          </div>
-          <div>
-            <p class="text-sm font-medium">Sports Day</p>
-            <p class="text-xs text-slate-500">College event</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            const handleSaveDept = () => {
+                if(!newDept.name || !newDept.code) return;
+                const id = Math.max(...departments.map(d => d.id), 0) + 1;
+                setDepartments([...departments, { 
+                    ...newDept, 
+                    id, 
+                    faculties: 0, 
+                    sections: 0, 
+                    courses: [] 
+                }]);
+                setIsAddingDept(false);
+                setNewDept({ name: "", code: "" });
+                onAction(`${newDept.name} created successfully.`);
+            };
 
-<!-- ==================== SCREEN 7: 403 Forbidden ==================== -->
-<section id="screen-403" class="screen flex items-center justify-center" style="min-height: calc(100vh - 56px);">
-  <div class="text-center">
-    <h1 class="text-7xl font-bold text-red-500 mb-4">403</h1>
-    <h2 class="text-2xl font-semibold mb-2">Access Denied</h2>
-    <p class="text-slate-500 mb-6">You don't have permission to view this page.</p>
-    <button class="btn btn-primary" onclick="goToDashboard()">Go to Dashboard</button>
-  </div>
-</section>
+            const handleUpdateDeptDetails = (id, field, value) => {
+                setDepartments(departments.map(d => 
+                    d.id === id ? { ...d, [field]: value } : d
+                ));
+            };
 
-</main>
-</div>
+            return (
+                <div className="space-y-6 animate-in fade-in duration-500">
+                    <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-xl font-black text-slate-800">Academic Infrastructure</h3>
+                        <button onClick={() => setIsAddingDept(true)} className="btn-primary px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+                            <Icon name="plus-circle" size={16} /> New Department
+                        </button>
+                    </div>
 
-<!-- ==================== MODALS ==================== -->
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {departments.map((dept) => (
+                            <div key={dept.id} className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm hover:border-red-200 transition-all group relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-red-50/50 rounded-full -mr-12 -mt-12 group-hover:bg-red-500/10 transition-colors"></div>
+                                <div className="flex justify-between items-start mb-4 relative z-10">
+                                    <div className="p-2 bg-slate-50 group-hover:bg-red-50 text-slate-500 group-hover:text-red-600 rounded-lg transition-colors">
+                                        <Icon name="layout" />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button onClick={() => handleDeleteDept(dept.id, dept.name)} className="text-slate-300 hover:text-red-500 transition-colors">
+                                            <Icon name="trash-2" size={14} />
+                                        </button>
+                                        <button onClick={() => setSelectedDept(dept)} className="text-[10px] font-black tracking-widest text-slate-400 hover:text-red-600 uppercase">Manage</button>
+                                    </div>
+                                </div>
+                                <h5 className="font-bold text-slate-800 text-lg relative z-10">{dept.name}</h5>
+                                <p className="text-[10px] font-black tracking-widest text-red-600/60 mt-1 mb-4 relative z-10 uppercase">Code: {dept.code}</p>
+                                
+                                <div className="flex flex-wrap gap-2 mb-4 relative z-10">
+                                    {dept.courses.length === 0 ? (
+                                        <span className="text-[10px] italic text-slate-400 font-medium">No courses added yet</span>
+                                    ) : (
+                                        <>
+                                            {dept.courses.slice(0, 3).map((c, idx) => (
+                                                <span key={idx} className="px-2 py-1 bg-slate-50 text-slate-500 text-[10px] font-bold rounded-md">{c}</span>
+                                            ))}
+                                            {dept.courses.length > 3 && <span className="px-2 py-1 bg-red-50 text-red-600 text-[10px] font-bold rounded-md">+{dept.courses.length - 3} more</span>}
+                                        </>
+                                    )}
+                                </div>
 
-<!-- Create User Modal -->
-<div id="createUserModal" class="modal-overlay" onclick="if(event.target===this)toggleModal('createUserModal')">
-  <div class="modal">
-    <div class="p-5 border-b flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Create User</h2>
-      <button onclick="toggleModal('createUserModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Name</label>
-        <input class="input" placeholder="Full name">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-        <input class="input" type="email" placeholder="user@cec.edu.in">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
-        <input class="input" type="password" placeholder="Min 8 chars, 1 upper, 1 lower, 1 digit">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Role</label>
-        <select class="input" id="createUserRole" onchange="toggleRoleFields()">
-          <option value="">Select role...</option>
-          <option value="admin">Admin</option>
-          <option value="faculty">Faculty</option>
-          <option value="student">Student</option>
-        </select>
-      </div>
-      <div id="studentFields" style="display:none;" class="space-y-4 pt-2 border-t border-dashed">
-        <p class="text-xs font-semibold text-slate-400 uppercase">Student Details</p>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">USN</label>
-          <input class="input" placeholder="e.g., 1CG21CS001">
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
-            <select class="input"><option>CSE</option><option>ISE</option><option>ECE</option><option>EEE</option><option>ME</option><option>CE</option><option>AIML</option><option>MBA</option></select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Section</label>
-            <select class="input"><option>3A</option><option>3B</option><option>5A</option><option>5B</option><option>7A</option><option>7B</option></select>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Semester</label>
-            <select class="input"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Academic Year</label>
-            <input class="input" value="2025-26">
-          </div>
-        </div>
-      </div>
-      <div id="facultyFields" style="display:none;" class="space-y-4 pt-2 border-t border-dashed">
-        <p class="text-xs font-semibold text-slate-400 uppercase">Faculty Details</p>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Employee ID</label>
-          <input class="input" placeholder="e.g., CEC-F-004">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
-          <select class="input"><option>CSE</option><option>ISE</option><option>ECE</option><option>EEE</option><option>ME</option><option>CE</option><option>AIML</option><option>MBA</option></select>
-        </div>
-      </div>
-    </div>
-    <div class="p-5 border-t flex gap-2 justify-end">
-      <button class="btn btn-secondary" onclick="toggleModal('createUserModal')">Cancel</button>
-      <button class="btn btn-primary">Create User</button>
-    </div>
-  </div>
-</div>
+                                <div className="grid grid-cols-2 gap-4 border-t border-slate-50 pt-4 relative z-10">
+                                    <div>
+                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Faculties</p>
+                                        <p className="text-lg font-black text-slate-700">{dept.faculties}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Sections</p>
+                                        <p className="text-lg font-black text-slate-700">{dept.sections}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
 
-<!-- Bulk Import Modal -->
-<div id="importModal" class="modal-overlay" onclick="if(event.target===this)toggleModal('importModal')">
-  <div class="modal">
-    <div class="p-5 border-b flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Bulk Import Students</h2>
-      <button onclick="toggleModal('importModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div class="bg-blue-50 border border-blue-200 text-blue-700 text-sm p-3 rounded-md">
-        Upload a CSV file with columns: <code class="bg-blue-100 px-1 rounded">name, email, usn, department_code, semester, section</code>
-      </div>
-      <div>
-        <button class="btn btn-outline text-sm mb-3">
-          <i data-lucide="download" class="w-4 h-4"></i> Download CSV Template
-        </button>
-      </div>
-      <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center">
-        <i data-lucide="upload-cloud" class="w-10 h-10 text-slate-400 mx-auto mb-3"></i>
-        <p class="text-sm text-slate-600">Drag & drop CSV file here, or click to browse</p>
-        <p class="text-xs text-slate-400 mt-1">Max file size: 5MB</p>
-        <input type="file" class="hidden" accept=".csv">
-      </div>
-    </div>
-    <div class="p-5 border-t flex gap-2 justify-end">
-      <button class="btn btn-secondary" onclick="toggleModal('importModal')">Cancel</button>
-      <button class="btn btn-primary">Import</button>
-    </div>
-  </div>
-</div>
+                    {/* New Department Modal */}
+                    {isAddingDept && (
+                        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[110] flex items-center justify-center p-6 animate-in fade-in duration-300">
+                            <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-300">
+                                <div className="p-8 border-b border-slate-100 bg-gradient-to-r from-red-500 to-red-600">
+                                    <h4 className="text-xl font-black text-white">System Infrastructure</h4>
+                                    <p className="text-xs font-bold text-white/70 uppercase tracking-widest mt-1">Register New Academic Unit</p>
+                                </div>
+                                <div className="p-8 space-y-6">
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2 block">Full Department Name</label>
+                                        <input 
+                                            type="text" 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-red-500/5 focus:border-red-400 font-bold text-slate-800"
+                                            placeholder="e.g. Civil Engineering"
+                                            value={newDept.name}
+                                            onChange={e => setNewDept({...newDept, name: e.target.value})}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2 block">Department Code</label>
+                                        <input 
+                                            type="text" 
+                                            className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-red-500/5 focus:border-red-400 font-bold text-slate-800 uppercase"
+                                            placeholder="e.g. CV"
+                                            value={newDept.code}
+                                            onChange={e => setNewDept({...newDept, code: e.target.value})}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="p-6 bg-slate-50 flex gap-3">
+                                    <button onClick={() => setIsAddingDept(false)} className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl font-bold hover:bg-slate-50">Cancel</button>
+                                    <button onClick={handleSaveDept} className="flex-1 py-3 btn-primary rounded-xl font-bold shadow-lg shadow-red-200">Create Unit</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
-<!-- Create Department Modal -->
-<div id="createDeptModal" class="modal-overlay" onclick="if(event.target===this)toggleModal('createDeptModal')">
-  <div class="modal">
-    <div class="p-5 border-b flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Create Department</h2>
-      <button onclick="toggleModal('createDeptModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Department Code</label>
-        <input class="input" placeholder="e.g., CSE (2-5 uppercase letters)" maxlength="5" style="text-transform: uppercase;">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Department Name</label>
-        <input class="input" placeholder="e.g., Computer Science and Engineering">
-      </div>
-    </div>
-    <div class="p-5 border-t flex gap-2 justify-end">
-      <button class="btn btn-secondary" onclick="toggleModal('createDeptModal')">Cancel</button>
-      <button class="btn btn-primary">Create Department</button>
-    </div>
-  </div>
-</div>
+                    {selectedDept && (
+                        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[100] flex items-center justify-center p-6 sm:p-12 animate-in fade-in duration-300">
+                            <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-300">
+                                <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-gradient-to-r from-white to-slate-50">
+                                    <div>
+                                        <input 
+                                            className="text-2xl font-black text-slate-800 bg-transparent border-b border-transparent focus:border-red-300 outline-none pr-4"
+                                            value={selectedDept.name}
+                                            onChange={e => handleUpdateDeptDetails(selectedDept.id, 'name', e.target.value)}
+                                        />
+                                        <div className="flex items-center gap-2 mt-1">
+                                            <span className="text-xs font-bold text-red-600/60 uppercase tracking-widest">Code:</span>
+                                            <input 
+                                                className="text-xs font-bold text-red-600/60 uppercase tracking-widest bg-transparent border-b border-transparent focus:border-red-300 outline-none w-16"
+                                                value={selectedDept.code}
+                                                onChange={e => handleUpdateDeptDetails(selectedDept.id, 'code', e.target.value.toUpperCase())}
+                                            />
+                                        </div>
+                                    </div>
+                                    <button onClick={() => setSelectedDept(null)} className="p-2 bg-slate-100 hover:bg-red-50 text-slate-400 hover:text-red-600 rounded-full transition-all">
+                                        <Icon name="x" size={24} />
+                                    </button>
+                                </div>
+                                
+                                <div className="flex-1 overflow-y-auto p-8 space-y-8">
+                                    <div>
+                                        <h5 className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4">Core Statistics</h5>
+                                        <div className="grid grid-cols-3 gap-4">
+                                            {[{ label: "Faculties", val: selectedDept.faculties, icon: "users" }, { label: "Sections", val: selectedDept.sections, icon: "columns" }, { label: "HOD", val: "Dr. Sathish", icon: "user-check" }].map((s, i) => (
+                                                <div key={i} className="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                                    <div className="text-slate-400 mb-2"><Icon name={s.icon} size={16} /></div>
+                                                    <p className="text-[10px] font-bold text-slate-500 uppercase">{s.label}</p>
+                                                    <p className="text-lg font-black text-slate-800">{s.val}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
 
-<!-- Create Section Modal -->
-<div id="createSectionModal" class="modal-overlay" onclick="if(event.target===this)toggleModal('createSectionModal')">
-  <div class="modal">
-    <div class="p-5 border-b flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Add Section to CSE</h2>
-      <button onclick="toggleModal('createSectionModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Section Name</label>
-        <input class="input" placeholder="e.g., A, B, C">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Semester</label>
-        <select class="input"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Academic Year</label>
-        <input class="input" value="2025-26">
-      </div>
-    </div>
-    <div class="p-5 border-t flex gap-2 justify-end">
-      <button class="btn btn-secondary" onclick="toggleModal('createSectionModal')">Cancel</button>
-      <button class="btn btn-primary">Add Section</button>
-    </div>
-  </div>
-</div>
+                                    <div>
+                                        <div className="flex justify-between items-center mb-4">
+                                            <h5 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Active Courses</h5>
+                                            <button onClick={() => {
+                                                const name = prompt("Enter new course name:");
+                                                if(name) handleAddCourse(selectedDept.id, name);
+                                            }} className="text-[10px] font-bold text-red-600 hover:underline">ADD COURSE</button>
+                                        </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            {selectedDept.courses.map((course, i) => (
+                                                <div key={i} className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:border-red-100 hover:bg-red-50/20 transition-all group">
+                                                    <span className="text-sm font-medium text-slate-700">{course}</span>
+                                                    <button 
+                                                        onClick={() => {
+                                                            setDepartments(departments.map(d => 
+                                                                d.id === selectedDept.id ? { ...d, courses: d.courses.filter(c => c !== course) } : d
+                                                            ));
+                                                        }}
+                                                        className="opacity-0 group-hover:opacity-100 text-slate-300 hover:text-red-500 transition-all"
+                                                    >
+                                                        <Icon name="trash-2" size={14} />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
 
-<!-- Create Assignment Modal -->
-<div id="createAssignmentModal" class="modal-overlay" onclick="if(event.target===this)toggleModal('createAssignmentModal')">
-  <div class="modal">
-    <div class="p-5 border-b flex items-center justify-between">
-      <h2 class="text-lg font-semibold">New Faculty Assignment</h2>
-      <button onclick="toggleModal('createAssignmentModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-    </div>
-    <div class="p-5 space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Faculty Member</label>
-        <select class="input">
-          <option>Select faculty...</option>
-          <option>Dr. Ramesh Kumar (CSE)</option>
-          <option>Prof. Sunita Rao (CSE)</option>
-          <option>Prof. Anil Kumar (ISE)</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Department</label>
-        <select class="input"><option>CSE</option><option>ISE</option><option>ECE</option><option>EEE</option><option>ME</option><option>CE</option><option>AIML</option><option>MBA</option></select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Section</label>
-        <select class="input"><option>3rd Sem — A</option><option>3rd Sem — B</option><option>5th Sem — A</option><option>5th Sem — B</option><option>7th Sem — A</option><option>7th Sem — B</option></select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-        <input class="input" placeholder="e.g., Data Structures">
-      </div>
-    </div>
-    <div class="p-5 border-t flex gap-2 justify-end">
-      <button class="btn btn-secondary" onclick="toggleModal('createAssignmentModal')">Cancel</button>
-      <button class="btn btn-primary">Create Assignment</button>
-    </div>
-  </div>
-</div>
+                                <div className="p-6 bg-slate-50 border-t border-slate-100 flex gap-4">
+                                    <button onClick={() => setSelectedDept(null)} className="flex-1 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl font-bold hover:bg-slate-50">Discard Changes</button>
+                                    <button onClick={() => {
+                                        setSelectedDept(null);
+                                        onAction("Infrastructure updated for " + selectedDept.code);
+                                    }} className="flex-1 py-3 btn-primary rounded-xl font-bold">Save All Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
 
-<!-- ==================== SCRIPTS ==================== -->
-<script>
-  let currentRole = null;
+        const Reports = ({ onAction }) => {
+            const [isGenerating, setIsGenerating] = useState(false);
+            const [reportData, setReportData] = useState(null);
 
-  function showRole(role) {
-    currentRole = role;
-    document.getElementById('screen-login').style.display = 'none';
-    document.getElementById('appShell').style.display = 'block';
+            const handleGenerate = () => {
+                setIsGenerating(true);
+                setReportData(null);
+                setTimeout(() => {
+                    setIsGenerating(false);
+                    setReportData([
+                        { dept: "CSE", attendance: "88%", performance: "A+", enrollment: 420 },
+                        { dept: "ECE", attendance: "82%", performance: "B", enrollment: 310 },
+                        { dept: "AI&ML", attendance: "91%", performance: "A", enrollment: 150 },
+                        { dept: "ME", attendance: "75%", performance: "C+", enrollment: 280 }
+                    ]);
+                    onAction("Analytics report generated successfully");
+                }, 1500);
+            };
 
-    // Hide all role navs
-    document.getElementById('nav-admin').style.display = 'none';
-    document.getElementById('nav-faculty').style.display = 'none';
-    document.getElementById('nav-student').style.display = 'none';
+            return (
+                <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 animate-in fade-in duration-500">
+                    <div className="flex flex-col md:flex-row gap-8 mb-8">
+                        <div className="w-full md:w-72 space-y-6">
+                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Report Configuration</h4>
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="text-xs font-bold text-slate-500 block mb-2">Target Department</label>
+                                    <select className="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-500/10">
+                                        <option>All Departments</option>
+                                        <option>CSE</option>
+                                        <option>ECE</option>
+                                        <option>AI&ML</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="text-xs font-bold text-slate-500 block mb-2">Metric Priority</label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {["Attendance", "Academic", "Fee Status", "Grievance"].map((m, i) => (
+                                            <label key={i} className="flex items-center gap-2 p-3 bg-slate-50 border border-slate-100 rounded-xl cursor-pointer hover:bg-white transition-all">
+                                                <input type="checkbox" className="text-red-500 rounded" defaultChecked={i===0} />
+                                                <span className="text-[10px] font-black text-slate-600 uppercase tracking-tighter">{m}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                                <button 
+                                    onClick={handleGenerate} 
+                                    className="w-full py-4 btn-primary rounded-xl font-bold shadow-lg shadow-red-200 flex items-center justify-center gap-2"
+                                >
+                                    {isGenerating ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : <Icon name="play" size={16} />}
+                                    Generate Analytics
+                                </button>
+                            </div>
+                        </div>
+                        <div className="flex-1">
+                            <div className="flex justify-between items-center mb-6">
+                                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Live Report Preview</h4>
+                                <div className="flex gap-2">
+                                    <button disabled={!reportData} onClick={() => onAction("Exporting to PDF...")} className={`p-2 border border-slate-200 rounded-lg transition-colors ${!reportData ? 'opacity-30 cursor-not-allowed' : 'text-slate-500 hover:text-red-600 hover:bg-red-50'}`}><Icon name="file-text" size={18} /></button>
+                                    <button disabled={!reportData} onClick={() => onAction("Exporting to Excel...")} className={`p-2 border border-slate-200 rounded-lg transition-colors ${!reportData ? 'opacity-30 cursor-not-allowed' : 'text-slate-500 hover:text-green-600 hover:bg-green-50'}`}><Icon name="file-spreadsheet" size={18} /></button>
+                                </div>
+                            </div>
+                            
+                            {isGenerating ? (
+                                <div className="h-64 border-2 border-dashed border-red-100 rounded-2xl flex flex-col items-center justify-center space-y-4 bg-slate-50/50">
+                                    <div className="flex gap-1">
+                                        <div className="w-2 h-8 bg-red-400 rounded-full animate-bounce" style={{animationDelay: '0s'}}></div>
+                                        <div className="w-2 h-12 bg-red-500 rounded-full animate-bounce" style={{animationDelay: '0.12s'}}></div>
+                                        <div className="w-2 h-6 bg-red-300 rounded-full animate-bounce" style={{animationDelay: '0.24s'}}></div>
+                                    </div>
+                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Processing Cluster Data...</p>
+                                </div>
+                            ) : reportData ? (
+                                <div className="overflow-hidden border border-slate-100 rounded-2xl animate-in fade-in zoom-in-95 duration-500">
+                                    <table className="w-full text-left">
+                                        <thead className="bg-slate-50 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                            <tr>
+                                                <th className="px-6 py-4">Department</th>
+                                                <th className="px-6 py-4 text-center">Avg Attendance</th>
+                                                <th className="px-6 py-4 text-center">Performance</th>
+                                                <th className="px-6 py-4 text-center">Enrollment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {reportData.map((row, i) => (
+                                                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                                                    <td className="px-6 py-4 text-sm font-bold text-slate-700">{row.dept}</td>
+                                                    <td className="px-6 py-4 text-center text-sm font-medium text-slate-600">{row.attendance}</td>
+                                                    <td className="px-6 py-4 text-center">
+                                                        <span className="px-2 py-1 bg-green-50 text-green-600 text-[10px] font-black rounded uppercase">{row.performance}</span>
+                                                    </td>
+                                                    <td className="px-6 py-4 text-center text-sm font-bold text-slate-800">{row.enrollment}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <div className="h-64 border-2 border-dashed border-slate-100 rounded-2xl flex flex-col items-center justify-center space-y-2 bg-slate-50/30 text-slate-400">
+                                    <Icon name="bar-chart-2" size={48} className="opacity-10 mb-2" />
+                                    <p className="text-xs font-bold uppercase tracking-widest">Engine Ready</p>
+                                    <p className="text-[10px] font-medium opacity-60">Click 'Generate' to initialize report stream</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
-    // Update header based on role
-    const headerName = document.getElementById('headerUserName');
-    const headerBadge = document.getElementById('headerRoleBadge');
-    const headerAvatar = document.getElementById('headerAvatar');
-    const sidebarName = document.getElementById('sidebarUserName');
-    const sidebarEmail = document.getElementById('sidebarUserEmail');
+        const Announcements = ({ onAction }) => {
+            const [post, setPost] = useState({ title: "", content: "", scope: "Global — All Users" });
+            
+            return (
+                <div className="max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-100 p-10 animate-in slide-in-from-bottom-5 duration-500 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 via-orange-500 to-red-500"></div>
+                    <div className="flex justify-between items-start mb-8">
+                        <div>
+                            <h4 className="font-black text-slate-800 text-2xl tracking-tight">Compose System Broadcast</h4>
+                            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 text-red-600/60">Global Communication Portal</p>
+                        </div>
+                        <div className="p-3 bg-red-50 text-red-600 rounded-2xl shadow-inner">
+                            <Icon name="megaphone" size={24} />
+                        </div>
+                    </div>
+                    
+                    <div className="space-y-8">
+                        <div>
+                            <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4">Target Audience Scope</label>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {["Global — All Users", "Faculty Only", "CSE Department", "Student Only"].map((scope, i) => (
+                                    <label key={i} className={`flex items-center gap-3 p-4 border rounded-2xl cursor-pointer transition-all ${post.scope === scope ? 'bg-red-50 border-red-200 ring-2 ring-red-500/10' : 'bg-slate-50 border-slate-100 hover:bg-white hover:border-slate-200'}`}>
+                                        <input type="radio" name="scope" className="hidden" checked={post.scope === scope} onChange={() => setPost({...post, scope})} />
+                                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${post.scope === scope ? 'border-red-500' : 'border-slate-300'}`}>
+                                            {post.scope === scope && <div className="w-2 h-2 bg-red-500 rounded-full"></div>}
+                                        </div>
+                                        <span className={`text-[10px] font-black uppercase tracking-tighter ${post.scope === scope ? 'text-red-700' : 'text-slate-500'}`}>{scope}</span>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Subject Headline</label>
+                                <input 
+                                    type="text" 
+                                    value={post.title}
+                                    onChange={e => setPost({...post, title: e.target.value})}
+                                    placeholder="e.g. Schedule for External Lab Examination (Final Sem)" 
+                                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/5 focus:bg-white focus:border-red-400 transition-all font-bold text-slate-800 placeholder:text-slate-300" 
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Announcement Detail</label>
+                                <textarea 
+                                    rows="6" 
+                                    value={post.content}
+                                    onChange={e => setPost({...post, content: e.target.value})}
+                                    placeholder="Provide comprehensive details for the broadcast..." 
+                                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-500/5 focus:bg-white focus:border-red-400 transition-all text-sm leading-relaxed text-slate-600 placeholder:text-slate-300"
+                                ></textarea>
+                            </div>
+                        </div>
 
-    if (role === 'admin') {
-      document.getElementById('nav-admin').style.display = 'block';
-      headerName.textContent = 'CEC Admin';
-      headerBadge.className = 'badge badge-admin text-xs';
-      headerBadge.textContent = 'Admin';
-      headerAvatar.className = 'w-8 h-8 rounded-full bg-red-500 flex items-center justify-center text-sm font-semibold text-white';
-      headerAvatar.textContent = 'CA';
-      sidebarName.textContent = 'CEC Admin';
-      sidebarEmail.textContent = 'admin@cec.edu.in';
-      showScreen('admin-dashboard');
-    } else if (role === 'faculty') {
-      document.getElementById('nav-faculty').style.display = 'block';
-      headerName.textContent = 'Dr. Ramesh Kumar';
-      headerBadge.className = 'badge badge-faculty text-xs';
-      headerBadge.textContent = 'Faculty';
-      headerAvatar.className = 'w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-sm font-semibold text-white';
-      headerAvatar.textContent = 'RK';
-      sidebarName.textContent = 'Dr. Ramesh Kumar';
-      sidebarEmail.textContent = 'ramesh@cec.edu.in';
-      showScreen('faculty-dashboard');
-    } else if (role === 'student') {
-      document.getElementById('nav-student').style.display = 'block';
-      headerName.textContent = 'Rahul Sharma';
-      headerBadge.className = 'badge badge-student text-xs';
-      headerBadge.textContent = 'Student';
-      headerAvatar.className = 'w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-sm font-semibold text-white';
-      headerAvatar.textContent = 'RS';
-      sidebarName.textContent = 'Rahul Sharma';
-      sidebarEmail.textContent = 'rahul@cec.edu.in';
-      showScreen('student-dashboard');
-    }
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <button 
+                                onClick={() => {
+                                    if(!post.title) return onAction("Error: Missing Title");
+                                    onAction("Announcement Draft '" + post.title + "' saved.");
+                                }} 
+                                className="flex-1 py-4 border-2 border-slate-100 rounded-2xl font-black text-slate-500 hover:bg-slate-50 hover:border-slate-200 transition-all flex items-center justify-center gap-2"
+                            >
+                                <Icon name="save" size={18} /> Save to Drafts
+                            </button>
+                            <button 
+                                onClick={() => {
+                                    if(!post.title || !post.content) return onAction("Error: Incomplete message");
+                                    onAction("Live Broadcast: '" + post.title + "' published!");
+                                    setPost({ title: "", content: "", scope: "Global — All Users" });
+                                }} 
+                                className="flex-1 py-4 btn-primary rounded-2xl font-black transition-all transform hover:scale-[1.02] shadow-xl shadow-red-200 flex items-center justify-center gap-2"
+                            >
+                                <Icon name="send" size={18} /> Publish Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
 
-    lucide.createIcons();
-  }
+        const FeeManagement = ({ onAction }) => (
+            <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden animate-in fade-in duration-500">
+                <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+                    <h4 className="font-bold text-slate-800">Student Fee Ledger</h4>
+                    <button className="text-sm font-semibold text-red-600 hover:underline">Reconcile All</button>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                        <thead className="bg-slate-50 text-slate-500 text-xs font-semibold uppercase">
+                            <tr>
+                                <th className="px-6 py-4">Student</th>
+                                <th className="px-6 py-4">USN</th>
+                                <th className="px-6 py-4">Course</th>
+                                <th className="px-6 py-4">Amount Due</th>
+                                <th className="px-6 py-4">Status</th>
+                                <th className="px-6 py-4 text-center">Admin Overrides</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100">
+                            {[
+                                { name: "Rohan Das", usn: "1CE25AI072", amount: "₹85,000", status: "Paid" },
+                                { name: "Sneha Patil", usn: "1CE25AI080", amount: "₹42,500", status: "Pending" },
+                                { name: "Varun K", usn: "1CE25AI091", amount: "₹90,000", status: "Overdue" },
+                                { name: "Ishani Roy", usn: "1CE25AI012", amount: "₹1,10,000", status: "Paid" },
+                                { name: "Kiran J", usn: "1CE25AI044", amount: "₹55,000", status: "Pending" }
+                            ].map((row, i) => (
+                                <tr key={i} className="hover:bg-slate-50/30">
+                                    <td className="px-6 py-4 text-sm font-medium text-slate-800">{row.name}</td>
+                                    <td className="px-6 py-4 text-xs font-mono text-slate-500">{row.usn}</td>
+                                    <td className="px-6 py-4 text-sm text-slate-600">B.E AI&ML</td>
+                                    <td className="px-6 py-4 text-sm font-bold text-slate-700">{row.amount}</td>
+                                    <td className="px-6 py-4">
+                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                                            row.status === 'Paid' ? 'badge-success' : row.status === 'Pending' ? 'badge-pending' : 'badge-danger'
+                                        }`}>{row.status}</span>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <button 
+                                            disabled={row.status === 'Paid'}
+                                            onClick={() => onAction("Marked " + row.usn + " as Paid manually")}
+                                            className={`text-[10px] font-bold py-1 px-3 rounded uppercase border transition-all ${
+                                                row.status === 'Paid' 
+                                                ? 'bg-slate-50 text-slate-300 border-slate-100 cursor-not-allowed' 
+                                                : 'border-red-200 text-red-600 hover:bg-red-600 hover:text-white'
+                                            }`}
+                                        >
+                                            Mark as Paid
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        );
 
-  function logout() {
-    document.getElementById('appShell').style.display = 'none';
-    document.getElementById('screen-login').classList.add('active');
-    document.getElementById('screen-login').style.display = '';
-    currentRole = null;
-    lucide.createIcons();
-  }
+        const GrievanceManagement = ({ onAction }) => (
+            <div className="space-y-4 animate-in fade-in duration-500">
+                {[
+                    { id: "GRV-102", title: "Library Air Conditioning Issue", submittedBy: "Sunil M (Student)", priority: "Medium", status: "Open", date: "Mar 14, 2026" },
+                    { id: "GRV-098", title: "Hostel WiFi Connectivity Downtime", submittedBy: "Rahul V (Student)", priority: "High", status: "Open", date: "Mar 12, 2026" },
+                    { id: "GRV-085", title: "Lab PC Hardware Upgrade Request", submittedBy: "Dr. Sathish (Faculty)", priority: "Low", status: "Escalated", date: "Mar 05, 2026" }
+                ].map((gr, i) => (
+                    <div key={i} className="bg-white p-5 rounded-xl border border-slate-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-1">
+                                <span className="text-xs font-bold text-slate-400">{gr.id}</span>
+                                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
+                                    gr.priority === 'High' ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-600'
+                                }`}>{gr.priority} Priority</span>
+                                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
+                                    gr.status === 'Open' ? 'badge-pending' : 'badge-admin'
+                                }`}>{gr.status}</span>
+                            </div>
+                            <h5 className="font-bold text-slate-800">{gr.title}</h5>
+                            <p className="text-xs text-slate-500 mt-1">Submitted by <span className="font-semibold">{gr.submittedBy}</span> on {gr.date}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <button onClick={() => onAction("Escalated grievance " + gr.id)} className="px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50">Escalate</button>
+                            <button onClick={() => onAction("Grievance " + gr.id + " marked as resolved")} className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700">Resolve</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        );
 
-  function showScreen(screenId) {
-    // Hide all screens
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    // Show target
-    const target = document.getElementById('screen-' + screenId);
-    if (target) target.classList.add('active');
-    // Update nav active state
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.querySelectorAll('[data-screen="' + screenId + '"]').forEach(n => n.classList.add('active'));
-    lucide.createIcons();
-  }
+        // Main App
+        const App = () => {
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [activeTab, setActiveTab] = useState("dashboard");
+            const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+            const { toasts, addToast } = useToast();
 
-  function goToDashboard() {
-    if (currentRole === 'admin') showScreen('admin-dashboard');
-    else if (currentRole === 'faculty') showScreen('faculty-dashboard');
-    else if (currentRole === 'student') showScreen('student-dashboard');
-  }
+            const handleLogin = () => {
+                setIsLoggedIn(true);
+                addToast("Welcome back, Administrator!");
+            };
 
-  function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-  }
+            const handleLogout = () => {
+                setIsLoggedIn(false);
+                addToast("Logged out successfully");
+            };
 
-  function toggleModal(id) {
-    const modal = document.getElementById(id);
-    modal.classList.toggle('open');
-  }
+            const [users, setUsers] = useState([
+                { id: "U001", name: "Dr. Sathish Kumar", role: "Faculty", dept: "CSE", status: "Active", email: "sathish.k@cec.edu" },
+                { id: "U002", name: "Megha Rao", role: "Student", dept: "ISE", status: "Active", email: "megha.1ce23is012@cec.edu" },
+                { id: "U003", name: "Prof. Ramesh B", role: "Faculty", dept: "ECE", status: "Suspended", email: "ramesh.b@cec.edu" },
+                { id: "U004", name: "Admin_Principal", role: "Admin", dept: "Admin", status: "Active", email: "principal@cec.edu" },
+                { id: "U005", name: "Arjun Singh", role: "Student", dept: "CSE", status: "Active", email: "arjun.1ce24ai005@cec.edu" },
+            ]);
 
-  function toggleRoleFields() {
-    const role = document.getElementById('createUserRole').value;
-    document.getElementById('studentFields').style.display = role === 'student' ? 'block' : 'none';
-    document.getElementById('facultyFields').style.display = role === 'faculty' ? 'block' : 'none';
-  }
+            const [departments, setDepartments] = useState([
+                { id: 1, name: "Computer Science and Engineering", code: "CSE", faculties: 24, sections: 8, courses: ["Data Structures", "DBMS", "Operating Systems"] },
+                { id: 2, name: "Electronics and Communication", code: "ECE", faculties: 18, sections: 6, courses: ["Analog Electronics", "Digital Signal Processing"] },
+                { id: 3, name: "Mechanical Engineering", code: "ME", faculties: 15, sections: 4, courses: ["Thermodynamics", "Fluid Mechanics"] },
+                { id: 4, name: "Artificial Intelligence and ML", code: "AI&ML", faculties: 12, sections: 4, courses: ["Machine Learning", "Neural Networks"] },
+                { id: 5, name: "Information Science and Eng", code: "ISE", faculties: 16, sections: 4, courses: ["Cloud Computing", "Software Engineering"] }
+            ]);
 
-  // Initialize icons
-  document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
-  });
-</script>
+            const menu = [
+                { id: "dashboard", label: "Dashboard", icon: "layout-dashboard" },
+                { id: "users", label: "User Management", icon: "users-round" },
+                { id: "config", label: "Dept & Courses", icon: "settings-2" },
+                { id: "reports", label: "Analytics Reports", icon: "bar-chart-3" },
+                { id: "announcements", label: "Announcements", icon: "megaphone" },
+                { id: "fees", label: "Fee Management", icon: "indian-rupee" },
+                { id: "grievances", label: "Grievances", icon: "folder-kanban" },
+            ];
 
+            const currentTitle = menu.find(m => m.id === activeTab)?.label;
+
+            useEffect(() => {
+                console.log(`App State: isLoggedIn=${isLoggedIn}, activeTab=${activeTab}`);
+            }, [activeTab, isLoggedIn]);
+
+            if (!isLoggedIn) {
+                return <LoginPage onLogin={handleLogin} />;
+            }
+
+            return (
+                <div key="dashboard-layout" className="flex min-h-screen">
+                    {/* Sidebar */}
+                    <div className={`${isSidebarOpen ? 'w-64' : 'w-0 overflow-hidden'} sidebar transition-all duration-300 flex flex-col fixed h-full z-20`}>
+                        <div className="p-6 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">
+                                    <Icon name="graduation-cap" className="text-white" size={24} />
+                                </div>
+                                <div className="text-white">
+                                    <h1 className="font-black text-xl leading-none">CEC</h1>
+                                    <p className="text-[10px] font-bold text-white/60 tracking-widest mt-1 uppercase">Admin Portal</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="mt-8 flex-1 overflow-y-auto no-scrollbar">
+                            {menu.map(item => (
+                                <SidebarItem 
+                                    key={item.id} 
+                                    {...item} 
+                                    active={activeTab === item.id} 
+                                    onClick={setActiveTab} 
+                                />
+                            ))}
+                        </div>
+
+                        <div className="p-6 border-t border-white/10 text-white/40">
+                             <p className="text-[10px] uppercase font-bold text-center tracking-tighter">Powered by Smart LMS v4.2</p>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+                        {/* Header */}
+                        <header className="h-20 bg-white border-b border-slate-100 flex items-center justify-between px-8 sticky top-0 z-10 glass">
+                            <div className="flex items-center gap-4">
+                                <button 
+                                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                                    className="p-2 hover:bg-slate-50 rounded-lg text-slate-500 transition-colors"
+                                >
+                                    <Icon name={isSidebarOpen ? "chevrons-left" : "menu"} size={22} />
+                                </button>
+                                <h2 className="font-bold text-slate-800 text-lg uppercase tracking-tight">{currentTitle}</h2>
+                            </div>
+
+                            <div className="flex items-center gap-6">
+                                <div className="hidden md:flex items-center bg-slate-50 rounded-full px-4 py-2 border border-slate-100">
+                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse mr-2"></span>
+                                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Live Updates On</span>
+                                </div>
+                                
+                                <button className="relative p-2 text-slate-400 hover:text-slate-600">
+                                    <Icon name="bell" size={20} />
+                                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                                </button>
+
+                                <div className="flex items-center gap-3 pl-4 border-l border-slate-100 group relative">
+                                    <div className="text-right">
+                                        <p className="text-sm font-bold text-slate-800">Administrator</p>
+                                        <p className="text-[10px] font-semibold text-slate-500 uppercase">Super Admin</p>
+                                    </div>
+                                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white font-bold shadow-md shadow-red-100 cursor-pointer">
+                                        ADM
+                                    </div>
+                                    
+                                    {/* Simple Logout Dropdown */}
+                                    <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 py-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all transform origin-top-right scale-95 group-hover:scale-100 z-50">
+                                        <div className="px-4 py-2 border-b border-slate-50 mb-1">
+                                            <p className="text-xs font-bold text-slate-400 uppercase">Account Settings</p>
+                                        </div>
+                                        <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left">
+                                            <Icon name="user" size={16} /> Profile
+                                        </button>
+                                        <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors text-left">
+                                            <Icon name="settings" size={16} /> Preferences
+                                        </button>
+                                        <button 
+                                            onClick={handleLogout}
+                                            className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors text-left font-semibold"
+                                        >
+                                            <Icon name="log-out" size={16} /> Sign Out
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        {/* Page Container */}
+                        <main className="p-8 pb-12 max-w-7xl mx-auto w-full">
+                            {activeTab === 'dashboard' && <DashboardHome />}
+                            {activeTab === 'users' && <UserManagement users={users} setUsers={setUsers} onAction={addToast} />}
+                            {activeTab === 'config' && <DeptConfig departments={departments} setDepartments={setDepartments} onAction={addToast} />}
+                            {activeTab === 'reports' && <Reports onAction={addToast} />}
+                            {activeTab === 'announcements' && <Announcements onAction={addToast} />}
+                            {activeTab === 'fees' && <FeeManagement onAction={addToast} />}
+                            {activeTab === 'grievances' && <GrievanceManagement onAction={addToast} />}
+                        </main>
+                    </div>
+
+                    {/* Toast Provider */}
+                    <div className="fixed bottom-8 right-8 z-[100] flex flex-col gap-3">
+                        {toasts.map(t => (
+                            <div key={t.id} className="bg-slate-900 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 animate-in slide-in-from-right-10 duration-300">
+                                <Icon name="check-circle-2" className="text-green-400" size={18} />
+                                <span className="text-sm font-medium">{t.message}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        try {
+            console.log("React: Attempting to render App...");
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<App />);
+            console.log("React: App render initiated.");
+        } catch (err) {
+            console.error("React Render Error:", err);
+        }
+    </script>
+    <script>
+        // Safety check: ensure root doesn't stay blank
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const root = document.getElementById('root');
+                if (root && root.innerText.includes('Loading')) {
+                    console.warn("Mockup still loading after 10s... showing backup UI.");
+                    // Only show backup if we are SURE it's stuck
+                    if (!window.ReactDOM) {
+                         root.innerHTML = `<div style="padding: 20px; text-align: center; color: #ef4444;"><h1>Loading Failed</h1><p>Internet connection issue detected.</p></div>`;
+                    }
+                }
+            }, 10000);
+        });
+    </script>
 </body>
 </html>
